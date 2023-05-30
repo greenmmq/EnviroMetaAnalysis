@@ -1,5 +1,7 @@
 
-Initial thought on an application design architecture - mark green
+# 1. Initial thought on an application design architecture
+
+MG
 
 ```mermaid
 flowchart TB
@@ -65,3 +67,59 @@ flowchart TB
     end
 
 ```
+
+# 2. Revised 5/30/2023
+
+MG, MV, PG
+
+```mermaid
+flowchart TB
+    
+    subgraph G["External Data Warehouse"]
+        oa[("OpenAlex")]
+    end
+
+    oa--OpenAlex API--> inbound
+    
+    subgraph A["Data Ingestion Pipeline"]
+        inbound[[Tools: PyAlex, PyMongo, Selenium\nTasks:\nRead-In Article Meta-Data\nETL data into BSON documents]]
+    end
+
+    inbound--add new records-->B    
+    
+    subgraph B["Project Data Warehouse"]
+        mongo[("MongoDB\n*Atlas Server*")]
+    end
+    
+    B--visualization pipeline-->C;
+
+    subgraph C["Tableau Visualizations"]
+        stats(["Statistics\nWordCloud\nPlots and Graphs"])
+    end
+
+    B--process records-->F--update records-->B;
+
+    subgraph D["Unsupervised Learning"]
+        net[["Tools: Networkx, SKLearn, Word2Vec\nTasks:\nLearn passive features like\nNetwork Attributes, PCA, clusters,\nword embeddings, TFIDF, n-grams"]]
+    end
+
+    subgraph E["Supervised Learning"]
+        direction LR
+        ml[["Tools: SKLearn, Torch\nTasks:\nLearn trained features through\nlogreg, xgboost, trees,\nFFNN, CNN, GNN, LSTM"]]
+        train(("Train some data"))
+        train-->ml
+    end
+
+    subgraph F["Feature Discovery API"]
+        D
+        E
+    end
+
+    subgraph H["EnviroMetaAnalysis App Service"]
+        A
+        F
+    end
+```
+
+
+
