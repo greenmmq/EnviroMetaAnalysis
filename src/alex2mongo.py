@@ -2,12 +2,35 @@
 # TESTING
 # Mark Green - 5/23/23
 
-#import pymongo
-import pyalex
+import json
 from pprint import pprint
+from pymongo.mongo_client import MongoClient
+from pymongo.server_api import ServerApi
+import pyalex
 
-pyalex.config.email = "margree@iu.edu"  # your email here
+def mongoConnect():
+    # get creds securely from ignored json
+    with open("security/creds.json", "rb") as f:
+        creds = json.load(f)
 
+    # connect to OpenAlex API
+    pyalex.config.email = creds[0]  # your email here
+    # set mongo uri variables
+    uid = creds[1]
+    pwd = creds[2]
+    cluster = creds[3]
+
+    uri = f"mongodb+srv://{uid}:{pwd}@{cluster}.mongodb.net/?retryWrites=true&w=majority"
+
+    # Create a new client and connect to the server
+    client = MongoClient(uri, server_api=ServerApi('1'))
+
+    # Send a ping to confirm a successful connection
+    try:
+        client.admin.command('ping')
+        print("Pinged your deployment. You successfully connected to EnviroMetaAnalysis MongoDB!")
+    except Exception as e:
+        print(e)
 
 
 def main():
