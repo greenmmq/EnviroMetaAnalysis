@@ -1,0 +1,17 @@
+[tool.poetry]
+name = "envirometaanalysis"
+version = "0.1.0"
+description = "ETL metadata from environmental science journals to MongoDB walyze and label data with ML techniques"
+authors = ["Mark, Prathima, Jerin"]
+license = "GPL-3.0"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+pyalex = "^0.10"
+pymongo = "^4.3.3"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
