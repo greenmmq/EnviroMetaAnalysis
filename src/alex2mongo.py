@@ -10,13 +10,14 @@ from pymongo.server_api import ServerApi
 import pyalex
 
 def mongoConnect():
-    # get creds securely from ignored json
-    with open("security/creds.json", "rb") as f:
-        creds = json.load(f)
+    """
+    This function connects to the MongoDB server using secure credentials
+    """
 
-    # connect to OpenAlex API
-    pyalex.config.email = creds["email"]  # your email here
-    # set mongo uri variables
+    with open("security/creds.json", "rb") as f:
+        creds = json.load(f)  # creds from ignored json - ask admin for one...
+
+    pyalex.config.email = creds["email"]
     uid = creds["uid"]
     pwd = creds["pwd"]
     cluster = creds["cluster"]
@@ -28,32 +29,52 @@ def mongoConnect():
     database = client["OpenAlexJournalArticles"]
     collection = database["Works"]
 
-    # Send a ping to confirm a successful connection
-    try:
+
+    try:  # Send a ping to confirm a successful connection
         client.admin.command('ping')
-        print("Pinged your deployment. You successfully connected to EnviroMetaAnalysis MongoDB!")
+        print("Pinged your deployment...\nSuccessfully connected to EnviroMetaAnalysis MongoDB!")
     except Exception as e:
         print(e)
 
-    return collection
+    return client, database, collection
+
+
+def alex2mongoPipe(collection):
+    """
+    This function queries OpenAlex API and pipes the results to the MongoDB server
+    """
+
+    print("Querying OpenAlex API...")
+
+    # use PyAlex library to write desired query q    
+    # oa paging: https://pypi.org/project/pyalex/
+    # Example query to get first page (25 works) from Env Sci Tech Journal:
+    # query = pyalex.Works().filter(primary_location={"source":{"id":"S13479253"}})
+    # ENTER QUERY BELOW...
+    query = pyalex.Works().filter(primary_location={"source":{"id":"S13479253"}}) \
+                          .paginate(per_page=200, n_max=10000)
+
+    #print(f"Results length: {len(query)})
+    print("Inserting documents...")
+    i=0
+    for page in query:
+        for doc in page:
+            d = dict(doc)
+            collection.insert_one(d)
+            i+=1
+    print(f"Successfully inserted {i} documents!")
 
 
 def main():
 
-    collection = mongoConnect()
+    client, _, collection = mongoConnect()
 
-    journal_articles = pyalex.Works().filter(primary_location={"source":{"id":"S13479253"}}).get(100)
-    print(f"Results length: {len(journal_articles)}\nInserting documents...")
-    i=0
-    for docs in journal_articles:
-       for d in docs:  # iterate over key-value pairs
-            print(type(BSON.encode(dict(d))))
-            print(type(docs))
-            print(type(journal_articles))
-            collection.insert_one(d) # your collection object here
-            i+=1
-    print(f"Successfully inserted {i} documents!")
-    
+    try:
+        alex2mongoPipe(collection=collection)
+    except Exception as e:
+        print(e)
+
+    client.close()
 
 if __name__ == "__main__":
     main()
