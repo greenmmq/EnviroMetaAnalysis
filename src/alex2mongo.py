@@ -2,6 +2,8 @@
 # TESTING
 # Mark Green - 5/23/23
 
+#!pip install pymongo pyalex
+
 import json
 from bson import BSON
 from pprint import pprint
@@ -52,7 +54,7 @@ def alex2mongoPipe(collection):
     # query = pyalex.Works().filter(primary_location={"source":{"id":"S13479253"}})
     # ENTER QUERY BELOW...
     query = pyalex.Works().filter(primary_location={"source":{"id":"S13479253"}}) \
-                          .paginate(per_page=200, n_max=10000)
+                          .paginate(per_page=200, n_max=1000)
 
     #print(f"Results length: {len(query)})
     print("Inserting documents...")
