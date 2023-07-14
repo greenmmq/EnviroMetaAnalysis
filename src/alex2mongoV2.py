@@ -1,7 +1,6 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# In[70]:
+# This script ETLs data from the OpenAlex API to a MongoDB Server
+# Version  = 1.1v
+# Jerin Thomas - 07/13/23
 
 
 import json
