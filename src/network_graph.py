@@ -1,3 +1,6 @@
+# Version  = 1.0v
+# Jerin Thomas - 06/28/23
+
 # -*- coding: utf-8 -*-
 """Network Graph.ipynb
 
