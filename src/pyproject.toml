@@ -10,6 +10,9 @@ readme = "README.md"
 python = "^3.11"
 pyalex = "^0.10"
 pymongo = "^4.3.3"
+tqdm = "^4.65.0"
+pandas = "^2.0.3"
+openpyxl = "^3.1.2"
 
 
 [build-system]
