@@ -2,3 +2,5 @@
 *.log
 *.log#
 *.lock
+/data/db
+/data/db.tar.zst
