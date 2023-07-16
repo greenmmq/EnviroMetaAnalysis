@@ -1,4 +1,4 @@
-.ipynb_checkpoints
-.log
-.log#
-.lock
+*.ipynb_checkpoints/
+*.log
+*.log#
+*.lock

@@ -78,9 +78,12 @@ def main():
         description='Writes OpenAlex query results to MongoDB.',
         epilog='Manually edit OpenAlex queries and MongoDB connection in script.'
     )
-    uri = parser.add_argument('-u','--uri',required=True) # target MongoDB server
-    email = parser.add_argument('-e','--email',required=True) # OpenAlex API courtesy
-    pyalex.config.email = email
+    uri = parser.add_argument('-u','--uri',required=True,
+                              help="URI for target MongoDB server")
+    email = parser.add_argument('-e','--email',required=True,
+                                help="email for OpenAlex API courtesy")
+    args = parser.parse_args()
+    pyalex.config.email = args.email  # set email for OpenAlex API courtesy
     # setup log file
     try:  ### WARNING! this clears the log file if one already exists....
         with open("alex2mongo.log","w") as file: pass
@@ -96,9 +99,9 @@ def main():
     # connect to MongoDB
     connected = False
     try:
-        client, database, collection = mongoConnect(uri)
+        client, _, collection = mongoConnect(args.uri)
         connected = True
-        logger.info(f'Connected to: {client}/{database}/{collection}')
+        logger.info(f'Connected to: {collection}')
         logger.info('------------------------')
     except Exception as e:
         logger.info('Connection Failure!')
