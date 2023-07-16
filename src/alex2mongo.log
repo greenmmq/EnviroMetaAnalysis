@@ -1,0 +1,17 @@
+Alex2Mongo Pipeline Logs
+2023-07-16 01:14:49.202801
+------------------------
+1093-7404 :: 150 articles :: 2.01 seconds
+2198-6592 :: 226 articles :: 2.37 seconds
+0179-5953 :: 206 articles :: 2.42 seconds
+0956-053X :: 5854 articles :: 56.86 seconds
+2666-4984 :: 102 articles :: 1.98 seconds
+2051-8153 :: 2102 articles :: 19.14 seconds
+2328-4277 :: 1076 articles :: 11.28 seconds
+2589-9147 :: 163 articles :: 1.88 seconds
+1877-3435 :: 1101 articles :: 10.71 seconds
+0301-4797 :: 14693 articles :: 162.8 seconds
+2212-0416 :: Failed to load articles....
+##### START ERROR LOG #####
+500 Server Error: INTERNAL SERVER ERROR for url: https://api.openalex.org/works?filter=primary_location.source.issn:2212-0416,publication_year:%3E2012&select=title,language,publication_year,publication_date,type,primary_location,authorships,biblio,concepts,abstract_inverted_index&per-page=200&cursor=Ils1OCwgJ2h0dHBzOi8vb3BlbmFsZXgub3JnL1cyNjEyNzE3NTczJ10i
+#####  END ERROR LOG  #####

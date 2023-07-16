@@ -1,40 +1,28 @@
 # This script ETLs data from the OpenAlex API to a MongoDB Server
 # TESTING
-# Mark Green - 5/23/23
+# Mark Green - 7/16/23
 
-#!pip install pymongo pyalex
-
+from datetime import datetime
 import json
-from bson import BSON
-from pprint import pprint
+import logging
+import numpy as np
+import pandas as pd
 from pymongo.mongo_client import MongoClient
 from pymongo.server_api import ServerApi
 import pyalex
-import pandas as pd
-import numpy as np
+import time
 from tqdm import tqdm
+
 
 def mongoConnect():
     """
     This function connects to the MongoDB server using secure credentials
     """
-
-#     with open("security/creds.json", "rb") as f:
-#         creds = json.load(f)  # creds from ignored json - ask admin for one...
-
-#     pyalex.config.email = creds["email"]
-#     uid = creds["uid"]
-#     pwd = creds["pwd"]
-#     cluster = creds["cluster"]
-
-    # uri = f"mongodb+srv://{uid}:{pwd}@{cluster}.mongodb.net/?retryWrites=true&w=majority"
-
-    uri = "mongodb://localhost:27017"
     
-    # Create a new client and connect to the server
+    uri = "mongodb://localhost:27017"
     client = MongoClient(uri, server_api=ServerApi('1'))
     database = client["OpenAlexJournals"]
-    collection = database["test"]
+    collection = database["works"]
 
     try:  # Send a ping to confirm a successful connection
         client.admin.command('ping')
@@ -46,7 +34,7 @@ def mongoConnect():
     return client, database, collection
 
 
-def alex2mongoPipe(collection):
+def alex2mongoPipe(collection,logger):
     """
     This function queries OpenAlex API and pipes the results to the MongoDB server
     """
@@ -60,28 +48,51 @@ def alex2mongoPipe(collection):
     
     print("Querying OpenAlex API and loading to MongoDB...")
     
-    pyalex.config.email="margree@iu.edu"
-    
     for i in tqdm(range(df.shape[0])):
         issn = df['ISSN'][i]
-        query = pyalex.Works().filter(primary_location={"source":{"issn":issn}}) \
-                              .filter(publication_year='>2012').select(selections) \
-                              .paginate(per_page=200, n_max=None)
+        try: 
+            toc = time.perf_counter()
+            query = pyalex.Works().filter(primary_location={"source":{"issn":issn}}) \
+                                  .filter(publication_year='>2012').select(selections) \
+                                  .paginate(per_page=200, n_max=None)     
+            doc_count = 0
+            for page in query:
+                for doc in page:
+                    d = dict(doc)
+                    collection.insert_one(d)
+                    doc_count += 1
+            tic = time.perf_counter()
+            duration = round(tic-toc,2)
+            logger.info(f"{issn} :: {doc_count} articles :: {duration} seconds")
+        except Exception as e:
+            logger.info(f"{issn} :: Failed to load articles....")
+            logger.info(f"##### START ERROR LOG #####\n{e}\n#####  END ERROR LOG  #####")
 
-        for page in query:
-            for doc in page:
-                d = dict(doc)
-                collection.insert_one(d)
-        
     print("Successfully inserted OpenAlex documents to MongoDB!")
     
 
 def main():
+    
+    pyalex.config.email = "margree@iu.edu"
+    
+    try:  # clear the log file
+        with open("alex2mongo.log","w") as file:
+            pass
+    finally:
+        pass
+
+    logger = logging.getLogger()
+    logger.setLevel(logging.INFO)
+    handler = logging.FileHandler('alex2mongo.log')
+    logger.addHandler(handler)
+    logger.info('Alex2Mongo Pipeline Logs')
+    logger.info(f"{datetime.now()}")
+    logger.info('------------------------')
 
     client, _, collection = mongoConnect()
 
     try:
-        alex2mongoPipe(collection=collection)
+        alex2mongoPipe(collection=collection,logger=logger)
     except Exception as e:
         print(e)
 
