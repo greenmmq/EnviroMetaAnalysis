@@ -2,7 +2,7 @@
 
 The EnviroMetaAnalysis queries journal articles published between 2013-2023 from a subset of journals related to the field of Environmental Sciences to explore the trends in environmental research around the world. These metadata were sourced from [OpenAlex](https://openalex.org/), stored on a [MongoDB](https://mongodb.com/) server, and analyzed with Python using [Jupyter](https://jupyter.org) notebooks. 
 
-This project is completed as part of the Indiana University FADS Summer 2023 program.
+This project is designed to support the [International Panel on Chemical Pollution](https://www.ipcp.ch/activities/ipcp-white-paper-on-the-scope-and-functions-of-the-future-science-policy-panel), established as part of United Nations Environment Assembly resolution 5/8. This work is completed through the Indiana University FADS Summer 2023 program for the Luddy School of Informatics, Computing, and Engineering.
 
 ## Program Operation
 
