@@ -1,11 +1,15 @@
 # Data
 
-Before creating the docker container with the MongoDB server, request from the admins a copy of the queried alex2mongo pipeline data `db.tar.zst`. Then extract the file to this directory. 
-
-Once this is complete, the tree should look similar to this: 
+Before creating the docker container with the MongoDB server, request from the admins a copy of the queried alex2mongo pipeline data `db.tar.gz`. Then extract the file to this directory with the following command:
 
 ```shell
-.
+tar xzf db.tar.gz db
+```
+
+Once completed, the tree should look like this: 
+
+```shell
+data
 ├── db
 │   ├── collection-0-1658338005162308688.wt
 │   ├── collection-10-1640006532910113381.wt
@@ -19,17 +23,14 @@ Once this is complete, the tree should look similar to this:
 │   ├── index-6-1658338005162308688.wt
 │   ├── journal
 │   ├── _mdb_catalog.wt
-│   ├── mongod.lock
 │   ├── sizeStorer.wt
 │   ├── storage.bson
 │   ├── WiredTiger
 │   ├── WiredTigerHS.wt
-│   ├── WiredTiger.lock
 │   ├── WiredTiger.turtle
 │   └── WiredTiger.wt
-├── db.tar.zst
-├── Environmental_Science_and_technology_2023.tsv
-├── Journal_List_Clarivate_mv.xlsx
+├── db.tar.gz
+├── Journal_List_Clarivate_Scopus_v1.xlsx
 ├── Kaggle_GDPbyCountry1999-2022.csv
 └── README.md
 ```

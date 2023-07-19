@@ -41,7 +41,7 @@ def alex2mongoPipe(collection,logger):
                   "type","primary_location","authorships","biblio",
                   "concepts","abstract_inverted_index"]
     # read-in list of ISSNs to filter OpenAlex query
-    df = pd.read_excel('../data/Journal_List_Clarivate_mv.xlsx',header=2,)[:272]
+    df = pd.read_excel('../data/Journal_List_Clarivate_Scopus_V1.xlsx',header=2)[:272]
     df['ISSN'] = df['ISSN'].fillna(df['eISSN'])
     # paginate the OpenAlex query and write docs to MongoDB collection
     print("Querying OpenAlex API and loading to MongoDB...")

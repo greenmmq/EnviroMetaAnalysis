@@ -4,3 +4,4 @@
 *.lock
 /data/db
 /data/db.tar.zst
+/data/db.tar.gz
