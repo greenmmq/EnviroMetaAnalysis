@@ -1,7 +1,7 @@
 Alex2Mongo Pipeline Logs
 2023-07-18 21:59:06.309176
 ------------------------
-Connected to: Collection(Database(MongoClient(host=['localhost:27017'], document_class=dict, tz_aware=False, connect=True), 'test_db'), 'journals')
+Connected to: Collection(Database(MongoClient(host=['localhost:27017'], document_class=dict, tz_aware=False, connect=True), 'OpenAlexEnvironmental'), 'journals')
 ------------------------
 1093-7404 :: 150 articles :: 1.08 seconds
 2198-6592 :: 226 articles :: 1.24 seconds
