@@ -24,3 +24,5 @@ To test that the container is operating as expected, run the following command f
 ```shell
 poetry run python test/test.py
 ```
+
+`test.py` counts the documents in the `journals` collection of `OpenAlexEnvironmental` database and should return a count of **1024395** documents.
