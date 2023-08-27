@@ -37,9 +37,9 @@ def alex2mongoPipe(collection,logger):
     Currently requires manual reconfiguration for any new queries. 
     """
     # Select OpenAlex fields
-    selections = ["title","language", "publication_year","publication_date",
-                  "type","primary_location","authorships","biblio",
-                  "concepts","abstract_inverted_index"]
+    selections = ["title","language","publication_year","publication_date",
+                  "type","primary_location","authorships","biblio","citation_by_count", 
+                  "citation_by_api_url","concepts","abstract_inverted_index"]
     # read-in list of ISSNs to filter OpenAlex query
     df = pd.read_excel('../data/Journal_List_Clarivate_Scopus_V1.xlsx',header=2)[:272]
     df['ISSN'] = df['ISSN'].fillna(df['eISSN'])

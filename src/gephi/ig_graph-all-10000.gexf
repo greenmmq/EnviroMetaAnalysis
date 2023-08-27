@@ -1,0 +1,98 @@
+<?xml version='1.0' encoding='utf-8'?>
+<gexf xmlns="http://www.gexf.net/1.2draft" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.gexf.net/1.2draft http://www.gexf.net/1.2draft/gexf.xsd" version="1.2">
+  <meta lastmodifieddate="2023-08-27">
+    <creator>NetworkX 2.8.8</creator>
+  </meta>
+  <graph defaultedgetype="undirected" mode="static" name="">
+    <attributes mode="static" class="edge">
+      <attribute id="3" title="cites_norm_gdppc_sum" type="double" />
+    </attributes>
+    <attributes mode="static" class="node">
+      <attribute id="0" title="coauthor_count" type="long" />
+      <attribute id="1" title="cited_by_sum" type="long" />
+      <attribute id="2" title="avg_cites_per_coauthor" type="double" />
+    </attributes>
+    <nodes>
+      <node id="High income" label="High income">
+        <attvalues>
+          <attvalue for="0" value="25001" />
+          <attvalue for="1" value="690626" />
+          <attvalue for="2" value="24.45" />
+        </attvalues>
+      </node>
+      <node id="Low income" label="Low income">
+        <attvalues>
+          <attvalue for="0" value="136" />
+          <attvalue for="1" value="2125" />
+          <attvalue for="2" value="9.582" />
+        </attvalues>
+      </node>
+      <node id="Lower middle income" label="Lower middle income">
+        <attvalues>
+          <attvalue for="0" value="3460" />
+          <attvalue for="1" value="70947" />
+          <attvalue for="2" value="16.454" />
+        </attvalues>
+      </node>
+      <node id="Upper middle income" label="Upper middle income">
+        <attvalues>
+          <attvalue for="0" value="20424" />
+          <attvalue for="1" value="403778" />
+          <attvalue for="2" value="19.631" />
+        </attvalues>
+      </node>
+    </nodes>
+    <edges>
+      <edge source="High income" target="High income" id="0">
+        <attvalues>
+          <attvalue for="3" value="10205.255989011795" />
+        </attvalues>
+      </edge>
+      <edge source="High income" target="Low income" id="1">
+        <attvalues>
+          <attvalue for="3" value="25.687111603462327" />
+        </attvalues>
+      </edge>
+      <edge source="High income" target="Lower middle income" id="2">
+        <attvalues>
+          <attvalue for="3" value="270.4848812401436" />
+        </attvalues>
+      </edge>
+      <edge source="High income" target="Upper middle income" id="3">
+        <attvalues>
+          <attvalue for="3" value="880.8792866867602" />
+        </attvalues>
+      </edge>
+      <edge source="Low income" target="Low income" id="4">
+        <attvalues>
+          <attvalue for="3" value="30.513624220311698" />
+        </attvalues>
+      </edge>
+      <edge source="Low income" target="Lower middle income" id="5">
+        <attvalues>
+          <attvalue for="3" value="0.603282244941189" />
+        </attvalues>
+      </edge>
+      <edge source="Low income" target="Upper middle income" id="6">
+        <attvalues>
+          <attvalue for="3" value="10.346461560563245" />
+        </attvalues>
+      </edge>
+      <edge source="Lower middle income" target="Lower middle income" id="7">
+        <attvalues>
+          <attvalue for="3" value="1441.8996806155033" />
+        </attvalues>
+      </edge>
+      <edge source="Lower middle income" target="Upper middle income" id="8">
+        <attvalues>
+          <attvalue for="3" value="90.33065925287605" />
+        </attvalues>
+      </edge>
+      <edge source="Upper middle income" target="Upper middle income" id="9">
+        <attvalues>
+          <attvalue for="3" value="6345.651774573724" />
+        </attvalues>
+      </edge>
+    </edges>
+  </graph>
+</gexf>
