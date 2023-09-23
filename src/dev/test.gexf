@@ -1,0 +1,50 @@
+<?xml version='1.0' encoding='utf-8'?>
+<gexf xmlns="http://www.gexf.net/1.2draft" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.gexf.net/1.2draft http://www.gexf.net/1.2draft/gexf.xsd" version="1.2">
+  <meta lastmodifieddate="2023-08-26">
+    <creator>NetworkX 2.8.8</creator>
+  </meta>
+  <graph defaultedgetype="undirected" mode="static" name="">
+    <attributes mode="static" class="node">
+      <attribute id="0" title="coauthor_count" type="long" />
+      <attribute id="1" title="avg_cites_per_coauthor" type="double" />
+    </attributes>
+    <nodes>
+      <node id="High income" label="High income">
+        <attvalues>
+          <attvalue for="0" value="1364" />
+          <attvalue for="1" value="5.814" />
+        </attvalues>
+      </node>
+      <node id="Low income" label="Low income">
+        <attvalues>
+          <attvalue for="0" value="9" />
+          <attvalue for="1" value="2.023" />
+        </attvalues>
+      </node>
+      <node id="Lower middle income" label="Lower middle income">
+        <attvalues>
+          <attvalue for="0" value="225" />
+          <attvalue for="1" value="4.881" />
+        </attvalues>
+      </node>
+      <node id="Upper middle income" label="Upper middle income">
+        <attvalues>
+          <attvalue for="0" value="1196" />
+          <attvalue for="1" value="2.981" />
+        </attvalues>
+      </node>
+    </nodes>
+    <edges>
+      <edge source="High income" target="High income" id="0" weight="24050" />
+      <edge source="High income" target="Low income" id="1" weight="6" />
+      <edge source="High income" target="Lower middle income" id="2" weight="514" />
+      <edge source="High income" target="Upper middle income" id="3" weight="2204" />
+      <edge source="Low income" target="Low income" id="4" weight="4" />
+      <edge source="Low income" target="Lower middle income" id="5" weight="2" />
+      <edge source="Low income" target="Upper middle income" id="6" weight="4" />
+      <edge source="Lower middle income" target="Lower middle income" id="7" weight="1909" />
+      <edge source="Lower middle income" target="Upper middle income" id="8" weight="180" />
+      <edge source="Upper middle income" target="Upper middle income" id="9" weight="17141" />
+    </edges>
+  </graph>
+</gexf>
